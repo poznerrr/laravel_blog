@@ -61,7 +61,7 @@
                     <div class="row blog-post-row">
                         <div class="col-md-6 blog-post" data-aos="fade-up">
                             <div class="blog-post-thumbnail-wrapper">
-                                <img src="{{asset('assets/images/blog_6.jpg)'}}" alt="blog post">
+                                <img src="{{asset('assets/images/blog_6.jpg')}}" alt="blog post">
                             </div>
                             <p class="blog-post-category">Blog post</p>
                             <a href="#!" class="blog-post-permalink">
