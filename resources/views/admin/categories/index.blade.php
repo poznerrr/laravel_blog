@@ -30,29 +30,40 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-8">
+                    <div class="col-6 d-flex">
                         <div class="card">
                             <div class="card-body table-responsive p-0">
                                 <table class="table table-hover text-nowrap">
                                     <thead>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th colspan="2">Action</th>
+                                        <th class="text-center">ID</th>
+                                        <th class="text-center">Name</th>
+                                        <th colspan="3" class="text-center">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     @foreach($categories as $category)
                                         <tr>
-                                            <td>{{$category->id}}</td>
-                                            <td>{{$category->title}}</td>
-                                            <td>
+                                            <td class="text-center">{{$category->id}}</td>
+                                            <td class="text-center">{{$category->title}}</td>
+                                            <td class="text-center">
                                                 <a href="{{route('admin.category.show', $category->id)}}"><i
                                                         class="far fa-eye"></i></a>
                                             </td>
                                             <td>
-                                                <a href="{{route('admin.category.edit', $category->id)}}" class="text-success"><i
+                                                <a href="{{route('admin.category.edit', $category->id)}}"
+                                                   class="text-success"><i
                                                         class="fas fa-pencil-alt"></i></a>
+                                            </td>
+                                            <td>
+                                                <form action="{{route('admin.category.destroy', $category->id)}}"
+                                                      method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="border-0 bg-transparent"><i
+                                                            class="fas fa-trash text-danger" role="button"></i></button>
+
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach
