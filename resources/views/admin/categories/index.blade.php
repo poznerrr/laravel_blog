@@ -38,7 +38,7 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Name</th>
-                                        <th>Action</th>
+                                        <th colspan="2">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -46,9 +46,14 @@
                                         <tr>
                                             <td>{{$category->id}}</td>
                                             <td>{{$category->title}}</td>
-                                            <td><a href="{{route('admin.category.show', $category->id)}}"><i
-                                                        class="far fa-eye"></i>
-                                                </a></td>
+                                            <td>
+                                                <a href="{{route('admin.category.show', $category->id)}}"><i
+                                                        class="far fa-eye"></i></a>
+                                            </td>
+                                            <td>
+                                                <a href="{{route('admin.category.edit', $category->id)}}" class="text-success"><i
+                                                        class="fas fa-pencil-alt"></i></a>
+                                            </td>
                                         </tr>
                                     @endforeach
                                     </tbody>

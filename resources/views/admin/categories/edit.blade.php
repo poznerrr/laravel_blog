@@ -6,10 +6,8 @@
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
-                    <div class="col-sm-6 d-flex align-items-center">
-                        <h1 class="m-0 mr-2">{{$category->title}}</h1>
-                        <a href="{{route('admin.category.edit', $category->id)}}" class="text-success"><i
-                                class="fas fa-pencil-alt"></i></a>
+                    <div class="col-sm-6">
+                        <h1 class="m-0">Edit Category</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -27,24 +25,22 @@
             <div class="container-fluid">
                 <!-- Small boxes (Stat box) -->
                 <div class="row">
-                    <div class="col-8">
-                        <div class="card">
-                            <div class="card-body table-responsive p-0">
-                                <table class="table table-hover text-nowrap">
-                                    <tbody>
-                                    <tr>
-                                        <td>ID</td>
-                                        <td>{{$category->id}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Name</td>
-                                        <td>{{$category->title}}</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                    <div class="col-12">
+                        <form action="{{route('admin.category.update', $category->id)}}" class="w-25" method="POST">
+                            @csrf
+                            @method('PATCH')
+                            <div class="form-group">
+                                <input type="text" name="id" value="{{$category->id}}" readonly>
                             </div>
-                            <!-- /.card-body -->
-                        </div>
+                            <div class="form-group">
+                                <input type="text" placeholder="Name of category" name="title"
+                                       value="{{$category->title}}">
+                            </div>
+                            <input type="submit" class="btn btn-primary" value="Edit">
+                            @error('title')
+                            <div class="text-danger">{{$message}}</div>
+                            @enderror
+                        </form>
                     </div>
                 </div>
                 <!-- /.row -->
