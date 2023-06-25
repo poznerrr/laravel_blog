@@ -81,6 +81,14 @@
                                         </option>
                                     @endforeach
                                 </select>
+                                <div class="form-group">
+                                    <label>Tags</label>
+                                    <select class="select2" name="tag_ids[]" multiple="multiple" data-placeholder="Select tags" style="width:100%;">
+                                        @foreach($tags as $tag)
+                                        <option {{is_array( old('tag_ids')) && in_array($tag->id, old('tag_ids'), false) ? 'selected' : ''}} value="{{$tag->id}}">{{$tag->title}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <input type="submit" class="btn btn-primary" value="Add">
