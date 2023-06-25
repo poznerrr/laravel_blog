@@ -52,6 +52,9 @@
                                     </div>
                                 </div>
                             </div>
+                            @error('preview_image')
+                            <div class="text-danger">{{$message}}</div>
+                            @enderror
                             <div class="form-group w-50">
                                 <label>Add main image</label>
                                 <div class="input-group">
@@ -63,6 +66,21 @@
                                         <span class="input-group-text">Upload</span>
                                     </div>
                                 </div>
+                            </div>
+
+                            @error('main_image')
+                            <div class="text-danger">{{$message}}</div>
+                            @enderror
+                            <div class="form-group w-50">
+                                <label> Category</label>
+                                <select class="form-control" name="category_id">
+                                    @foreach ($categories as $category)
+                                        <option value="{{$category->id}}"
+                                            {{$category->id === (int) old('category_id') ? 'selected': ''}}>
+                                            {{$category->title}}
+                                        </option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="form-group">
                                 <input type="submit" class="btn btn-primary" value="Add">
