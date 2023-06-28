@@ -26,20 +26,87 @@
                 <!-- Small boxes (Stat box) -->
                 <div class="row">
                     <div class="col-12">
-                        <form action="{{route('admin.post.update', $post->id)}}" class="w-25" method="POST">
+                        <form action="{{route('admin.post.update', $post->id)}}" method="POST"
+                              enctype="multipart/form-data">
                             @csrf
                             @method('PATCH')
+                            <label>Id (readonly)</label>
                             <div class="form-group">
                                 <input type="text" name="id" value="{{$post->id}}" readonly>
                             </div>
-                            <div class="form-group">
-                                <input type="text" placeholder="Name of post" name="title"
-                                       value="{{$post->title}}">
+                            <label>Title</label>
+                            <div class="form-group w-25">
+                                <input type="text" placeholder="Name of post" name="title" value="{{$post->title}}">
                             </div>
-                            <input type="submit" class="btn btn-primary" value="Edit">
                             @error('title')
                             <div class="text-danger">{{$message}}</div>
                             @enderror
+                            <div class="form-group">
+                                <textarea id="summernote" name="content">{{$post->content}}</textarea>
+                            </div>
+                            @error('content')
+                            <div class="text-danger">{{$message}}</div>
+                            @enderror
+                            <div class="form-group w-50">
+                                <label>Edit preview</label>
+                                <div class="w-25 mb-2">
+                                    <img src="{{asset('storage/'.$post->preview_image)}}" alt="preview image"
+                                         class="w-50">
+                                </div>
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" name="preview_image">
+                                        <label class="custom-file-label">Choose image</label>
+                                    </div>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">Upload</span>
+                                    </div>
+                                </div>
+                            </div>
+                            @error('preview_image')
+                            <div class="text-danger">{{$message}}</div>
+                            @enderror
+                            <div class="form-group w-50">
+                                <label>Edit main image</label>
+                                <div class="w-25 mb-2">
+                                    <img src="{{asset('storage/'.$post->main_image)}}" alt="main image" class="w-50">
+                                </div>
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" name="main_image">
+                                        <label class="custom-file-label">Choose image</label>
+                                    </div>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">Upload</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            @error('main_image')
+                            <div class="text-danger">{{$message}}</div>
+                            @enderror
+                            <div class="form-group w-50">
+                                <label> Category</label>
+                                <select class="form-control" name="category_id">
+                                    @foreach ($categories as $category)
+                                        <option value="{{$category->id}}"
+                                            {{$category->id === $post->category_id ? 'selected': ''}}>
+                                            {{$category->title}}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <div class="form-group">
+                                    <label>Tags</label>
+                                    <select class="select2" name="tag_ids[]" multiple="multiple"
+                                            data-placeholder="Select tags" style="width:100%;">
+                                        @foreach($tags as $tag)
+                                            <option
+                                                {{is_array( $post->tags->pluck('id')->toArray()) && in_array($tag->id, $post->tags->pluck('id')->toArray(), true) ? 'selected' : ''}} value="{{$tag->id}}">{{$tag->title}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <input type="submit" class="btn btn-primary" value="Edit">
                         </form>
                     </div>
                 </div>
